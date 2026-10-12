@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://christopher0301.github.io/windhoek-on-jean/sitemap.xml
