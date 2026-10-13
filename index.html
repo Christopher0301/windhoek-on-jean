@@ -133,6 +133,12 @@
   .hero p { color: #C9D0C2; }
   .hero h1 { font-size: clamp(2.1rem, 5vw, 3rem); max-width: 14ch; }
   .hero .lede { font-size: 1.1rem; margin-top: 18px; max-width: 50ch; }
+
+  /* Keep the hero heading on one line on desktop/tablet widths only;
+     the max-width:480px rule below still lets it wrap on mobile. */
+  @media (min-width: 481px) {
+    .hero h1 { white-space: nowrap; max-width: none; font-size: clamp(1.5rem, 3.4vw, 3rem); }
+  }
   .hero-ctas { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
   .btn { text-decoration: none; padding: 14px 22px; border-radius: 3px; font-weight: 600; font-size: 0.95rem; display: inline-block; text-align: center; min-height: 44px; }
   .btn-gold { background: var(--gold); color: #201804; }
