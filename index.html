@@ -154,6 +154,14 @@
 
   .welcome { padding-top: 72px; padding-bottom: 28px; }
   .teaser { padding-top: 12px; padding-bottom: 56px; }
+
+  /* EXPERIMENT: photo stays pinned in view while the Welcome +
+     Why-stay-with-us text scrolls past beside it. Desktop/tablet only
+     (see mobile override below) since sticky positioning combined with
+     long columns is finicky on small screens. */
+  .sticky-photo-wrap { padding-top: 0; padding-bottom: 56px; }
+  .sticky-photo { position: sticky; top: 24px; height: calc(100vh - 48px); max-height: 640px; align-self: start; }
+  .sticky-hl-grid { grid-template-columns: 1fr 1fr; }
   .teaser-card {
     display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: flex-start;
     background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 30px 28px;
@@ -211,9 +219,8 @@
   footer a { color: var(--ink-soft); }
 
   @media (max-width: 760px) {
-    .welcome { grid-template-columns: 1fr !important; }
-    .welcome > div:first-child { padding-left: 22px !important; padding-right: 22px !important; }
-    .welcome > div:last-child { height: 220px !important; border-radius: 0 !important; }
+    .sticky-photo-wrap { grid-template-columns: 1fr !important; padding-left: 22px !important; padding-right: 22px !important; }
+    .sticky-photo { position: static !important; height: 220px !important; max-height: none !important; }
     .wrap { padding-left: 22px; padding-right: 22px; }
     header { padding-top: calc(12px + env(safe-area-inset-top, 0px)); padding-bottom: 12px; }
     .hero { padding: 44px 0 40px; }
@@ -289,28 +296,29 @@
     </div>
   </div>
 
-  <div class="welcome" style="display:grid;grid-template-columns:1fr 1fr;align-items:center;">
-    <div style="padding-left:max(24px, calc((100vw - 1040px) / 2 + 24px)); padding-right:40px;">
-      <h2>Welcome</h2>
-      <p style="margin-top:20px;">Windhoek on Jean is a small, owner-run guesthouse in Doringkloof, Centurion. Every one of our six rooms is set up the same way, so there's no guesswork — just a comfortable double room, your own bathroom, DSTV, and a proper breakfast to start the day. We keep bookings personal: no online checkout, just a direct conversation with Hermien to find dates that work for you.</p>
-      <p style="margin-top:24px;">We're close to the N1 highway and all major routes, SuperSport Park, the Gautrain station, and within easy reach of several golf courses and hospitals in the area &mdash; a convenient base whether you're here for business, sport, or just passing through.</p>
-      <a href="https://www.facebook.com/windhoekonjean" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:28px;text-decoration:none;color:var(--ink-soft);font-size:0.88rem;font-weight:600;">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--gold)"><path d="M12 2l1.9 5.8h6.1l-4.9 3.6 1.9 5.8-4.9-3.6-4.9 3.6 1.9-5.8L4.2 7.8h6.1z"/></svg>
-        100% recommend on Facebook &middot; 10 reviews
-      </a>
+  <div class="wrap sticky-photo-wrap" style="max-width:1200px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:start;">
+    <div>
+      <div style="padding-top:72px;">
+        <h2>Welcome</h2>
+        <p style="margin-top:20px;">Windhoek on Jean is a small, owner-run guesthouse in Doringkloof, Centurion. Every one of our six rooms is set up the same way, so there's no guesswork — just a comfortable double room, your own bathroom, DSTV, and a proper breakfast to start the day. We keep bookings personal: no online checkout, just a direct conversation with Hermien to find dates that work for you.</p>
+        <p style="margin-top:24px;">We're close to the N1 highway and all major routes, SuperSport Park, the Gautrain station, and within easy reach of several golf courses and hospitals in the area &mdash; a convenient base whether you're here for business, sport, or just passing through.</p>
+        <a href="https://www.facebook.com/windhoekonjean" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:28px;text-decoration:none;color:var(--ink-soft);font-size:0.88rem;font-weight:600;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--gold)"><path d="M12 2l1.9 5.8h6.1l-4.9 3.6 1.9 5.8-4.9-3.6-4.9 3.6 1.9-5.8L4.2 7.8h6.1z"/></svg>
+          100% recommend on Facebook &middot; 10 reviews
+        </a>
+      </div>
+      <div style="padding-top:56px;padding-bottom:40px;">
+        <h2>Why stay with us</h2>
+        <div class="hl-grid sticky-hl-grid">
+          <div class="hl"><h3>6 en-suite rooms</h3><p>Each with a double bed, private bathroom and wardrobe space.</p></div>
+          <div class="hl"><h3>DSTV</h3><p>Settle in with a DSTV subscription in each room.</p></div>
+          <div class="hl"><h3>Breakfast included</h3><p>All rates include breakfast, with dinner available on request.</p></div>
+          <div class="hl"><h3>En-Suite Kitchenette</h3><p>Kettle, Microwave, wash basin, and general cutlery.</p></div>
+        </div>
+      </div>
     </div>
-    <div style="border-radius:8px 0 0 8px;overflow:hidden;height:420px;">
+    <div class="sticky-photo" style="border-radius:8px;overflow:hidden;">
       <img style="width:100%;height:100%;object-fit:cover;display:block;" src="data:image/jpeg;base64,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" alt="Windhoek on Jean entrance at golden hour">
-    </div>
-  </div>
-
-  <div class="highlights wrap">
-    <h2>Why stay with us</h2>
-    <div class="hl-grid">
-      <div class="hl"><h3>6 en-suite rooms</h3><p>Each with a double bed, private bathroom and wardrobe space.</p></div>
-      <div class="hl"><h3>DSTV</h3><p>Settle in with a DSTV subscription in each room.</p></div>
-      <div class="hl"><h3>Breakfast included</h3><p>All rates include breakfast, with dinner available on request.</p></div>
-      <div class="hl"><h3>En-Suite Kitchenette</h3><p>Kettle, Microwave, wash basin, and general cutlery.</p></div>
     </div>
   </div>
 
